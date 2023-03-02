@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="a0d2666e-82cd-481e-a140-4b14de1e58e2" name="deepstn+">
+        <fileTransfer accessType="SFTP" host="219.223.251.65" port="10025" sshConfigId="ee18a31b-7dd7-4560-999d-c5dd9f74fddc" sshConfig="root@219.223.251.65:10025 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
