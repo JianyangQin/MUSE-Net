@@ -13,7 +13,7 @@ import numpy as np
 from time import time
 import shutil
 
-seed = 777
+seed = 666
 
 def set_seed(seed):
     torch.manual_seed(seed)  # cpu

@@ -5,7 +5,7 @@
 
 ## Abstract
 <p align="center">
-<img src="./misc/framework.jpg" width="800" class="center">
+<img src="./misc/framework.png" width="800" class="center">
 </p>
 
 Traffic flow forecasting plays a crucial role in building smart cities in the Mobile Internet age. However, existing works of traffic flow forecasting investigated the multi-periodicity (e.g., hourly, daily and weekly) of traffic flow in an entangled manner, leading to unsatisfactory prediction of traffic flow. This is because the entangled learning that learns an unified representation for multi-periodicity has not yet to deal with the distribution shift and dynamic temporal interaction problems. In this paper, we propose a novel disentangled learning framework, namely <b>MU</b>lti-Pattern Di<b>SE</b>ntanglement Network (<b>MUSE-Net</b>), to tackle the limitations of entangled learning. Grounded in the theory of mutual information, we first learn and disentangle exclusive and interactive representations of traffic flow from multi-periodic patterns. Then, we utilize semantic-pushing and semantic-pulling regularizations to encourage the learned representations to be independent and informative. Moreover, we derive a lower bound estimator to tractably optimize the disentanglement problem and propose a joint training model for traffic flow forecasting. Extensive experimental results on several real-world traffic datasets demonstrate the effectiveness of the proposed framework.

@@ -16,7 +16,7 @@ import torch.nn as nn
 from torch.autograd import Variable
 import argparse
 
-seed = 777
+seed = 77
 
 def set_seed(seed):
     torch.manual_seed(seed)  # cpu

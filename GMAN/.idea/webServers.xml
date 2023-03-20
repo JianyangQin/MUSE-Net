@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="0bb1803b-0eb6-4ab3-9d33-bbf7b7d04729" name="gman_revise">
+        <fileTransfer accessType="SFTP" host="10.250.18.197" port="10122" sshConfigId="fd95ffce-344c-4b26-b34a-fca70a56d800" sshConfig="admin@10.250.18.197:10122 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

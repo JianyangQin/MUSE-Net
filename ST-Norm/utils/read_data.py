@@ -70,20 +70,20 @@ def load_data(dataset, args):
 
     # batch_size, seq, H * W, 2
     trainX = trainX.reshape(trainX.shape[0], trainX.shape[1], -1)
-    trainX = trainX.reshape(trainX.shape[0], 2, -1, trainX.shape[-1])
-    trainX = np.transpose(trainX, (0, 2, 3, 1))
+    trainX = trainX.reshape(trainX.shape[0], -1, 2, trainX.shape[-1])
+    trainX = np.transpose(trainX, (0, 1, 3, 2))
     trainY = trainY.reshape(trainY.shape[0], trainY.shape[1], -1)
     trainY = np.expand_dims(np.transpose(trainY, (0, 2, 1)), 1)
 
     valX = valX.reshape(valX.shape[0], valX.shape[1], -1)
-    valX = valX.reshape(valX.shape[0], 2, -1, valX.shape[-1])
-    valX = np.transpose(valX, (0, 2, 3, 1))
+    valX = valX.reshape(valX.shape[0], -1, 2, valX.shape[-1])
+    valX = np.transpose(valX, (0, 1, 3, 2))
     valY = valY.reshape(valY.shape[0], valY.shape[1], -1)
     valY = np.expand_dims(np.transpose(valY, (0, 2, 1)), 1)
 
     testX = testX.reshape(testX.shape[0], testX.shape[1], -1)
-    testX = testX.reshape(testX.shape[0], 2, -1, testX.shape[-1])
-    testX = np.transpose(testX, (0, 2, 3, 1))
+    testX = testX.reshape(testX.shape[0], -1, 2, testX.shape[-1])
+    testX = np.transpose(testX, (0, 1, 3, 2))
     testY = testY.reshape(testY.shape[0], testY.shape[1], -1)
     testY = np.expand_dims(np.transpose(testY, (0, 2, 1)), 1)
 
