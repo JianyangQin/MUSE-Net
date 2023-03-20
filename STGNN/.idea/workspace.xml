@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="791abad6-af3b-4810-9549-a3cd231b7540" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../GMAN/.idea/GMAN-PyTorch-master.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/STGNN-main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../STGSP/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MUSE-Net/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../MUSE-Net/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MUSE-Net/misc/framework.pdf" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../ST-Norm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ST-Norm/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ST-Norm/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ST-Norm/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ST-Norm/utils/read_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ST-Norm/utils/read_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../STGSP/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/../STGSP/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

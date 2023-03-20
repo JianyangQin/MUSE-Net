@@ -45,7 +45,7 @@ You can train our MUSE-Net by following the steps bellow.
  - Check the output results (RMSE and MAE). Models are saved to "Exps" folder for further use.
 
 ## Test:
-To obtain the best results reported in our paper, you can test our MUSE-Net via pre-trained models which can be downloaded from [BaiduYun](https://pan.baidu.com/s/1zeXvNfDu1BbDvgqcC7HupQ), password: tgoh.
+To obtain the best results reported in our paper, you can test our MUSE-Net via pre-trained models which can be downloaded from [BaiduYun](https://pan.baidu.com/s/1NbaJLdTFJ8408JBOmECPgg), password: jr22.
 
  - Download the pre-trained models and put them in 'Exps' folder
 
