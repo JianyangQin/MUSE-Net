@@ -1,10 +1,8 @@
-import tensorflow as tf
 import keras.backend as K
-from keras.losses import mean_squared_error, mean_absolute_error
+from keras.losses import mean_absolute_error
 
 def reconstruction_loss(origin, recon):
     return mean_absolute_error(origin, recon)
-    # return K.mean(mean_absolute_error(origin, recon))
 
 
 def KLD_loss_v1(mu, log_var):
@@ -39,11 +37,6 @@ def loss_function(cut0, cut1, cut2, cut3,
         p_data = y_true[:, :, :, 2 + cut1:2 + cut2]
         t_data = y_true[:, :, :, 2 + cut2:]
 
-        # y_label = y_true[:, :2, :, :]
-        # c_data = y_true[:, 2+cut0:2+cut1, :, :]
-        # p_data = y_true[:, 2+cut1:2+cut2, :, :]
-        # t_data = y_true[:, 2+cut2:, :, :]
-
         pred_weight = 1
         rec_weight = 1
         X_kld_weight = 0.02
@@ -56,10 +49,6 @@ def loss_function(cut0, cut1, cut2, cut3,
         recon_loss = rec_weight * (reconstruction_loss(c_data, c) +
                                    reconstruction_loss(p_data, p) +
                                    reconstruction_loss(t_data, t))
-
-        # recon_loss = rec_weight * (K.mean(reconstruction_loss(c_data, c_dec)) +
-        #                            K.mean(reconstruction_loss(p_data, p_dec)) +
-        #                            K.mean(reconstruction_loss(t_data, t_dec)))
 
         kl_C_loss = KLD_loss_v1(c_mu, c_log_var)
         kl_P_loss = KLD_loss_v1(p_mu, p_log_var)

@@ -72,8 +72,8 @@ if __name__ == "__main__":
         len_test = T * days_test
         T_closeness, T_period, T_trend = 1, T, T * 7
 
-        X_train, Y_train, X_val, Y_val, X_test, Y_test, MM, Max, Min = \
-            load_npy_data('Data/bike_flow.npy', train_ratio, len_test, len_closeness, len_period, len_trend, T_closeness,
+        X_train, Y_train, X_test, Y_test, MM, Max, Min = \
+            load_npy_data('Data/bike_flow.npy', len_test, len_closeness, len_period, len_trend, T_closeness,
                           T_period, T_trend)
     elif args.dataset == 'TaxiNYC':
         H, W, channel = 10, 20, 2  # grid size
@@ -81,8 +81,8 @@ if __name__ == "__main__":
         len_test = T * days_test
         T_closeness, T_period, T_trend = 1, T, T * 7
 
-        X_train, Y_train, X_val, Y_val, X_test, Y_test, MM, Max, Min = \
-            load_npy_data('Data/taxi_flow.npy', train_ratio, len_test, len_closeness, len_period, len_trend, T_closeness,
+        X_train, Y_train, X_test, Y_test, MM, Max, Min = \
+            load_npy_data('Data/taxi_flow.npy', len_test, len_closeness, len_period, len_trend, T_closeness,
                           T_period, T_trend)
     elif args.dataset == 'TaxiBJ':
         H, W, channel = 32, 32, 2  # grid size
@@ -90,18 +90,16 @@ if __name__ == "__main__":
         len_test = T * days_test
         T_closeness, T_period, T_trend = 1, T, T * 7
 
-        X_train, Y_train, X_val, Y_val, X_test, Y_test, MM, Max, Min = \
-            load_taxibj('Data/BJ13_M32x32_T30_InOut.h5', train_ratio, len_test, len_closeness, len_period, len_trend, T_closeness,
+        X_train, Y_train, X_test, Y_test, MM, Max, Min = \
+            load_taxibj('Data/BJ13_M32x32_T30_InOut.h5', len_test, len_closeness, len_period, len_trend, T_closeness,
                           T_period, T_trend, T)
     else:
         raise ValueError('dataset does not exist')
 
     X_train = np.concatenate((X_train[0], X_train[1], X_train[2]), axis=1)
-    X_val = np.concatenate((X_val[0], X_val[1], X_val[2]), axis=1)
     X_test = np.concatenate((X_test[0], X_test[1], X_test[2]), axis=1)
 
     Y_train = np.concatenate([Y_train, X_train], axis=1)
-    Y_val = np.concatenate([Y_val, X_val], axis=1)
     Y_test = np.concatenate([Y_test, X_test], axis=1)
 
     import time
@@ -115,15 +113,17 @@ if __name__ == "__main__":
 
     exps_path = 'Exps/'
     exps_files = os.listdir(exps_path)
+    
+    results, filenames = [], []
+    
+    model = Disentangle_Network(batch_size=batch_size, H=H, W=W,
+                                        channel=channel, c=len_closeness, p=len_period, t=len_trend,
+                                        feat_dim=feat_dim, conv=feat_dim, mu_dim=mu_dim,
+                                        R_N=2, plus=8, rate=1, drop=0.1, lr=lr)
 
     for file in exps_files:
         if (args.dataset in file) and (file.endswith('hdf5')):
             file_conv = os.path.join(exps_path, file)
-
-            model = Disentangle_Network(batch_size=batch_size, H=H, W=W,
-                                        channel=channel, c=len_closeness, p=len_period, t=len_trend,
-                                        feat_dim=feat_dim, conv=feat_dim, mu_dim=mu_dim,
-                                        R_N=2, plus=8, rate=1, drop=0.1, lr=lr)
 
             # val
             print('=' * 10)
@@ -144,6 +144,8 @@ if __name__ == "__main__":
             test_start = time.time()
             test_score = model.evaluate(X_test, Y_test, batch_size=batch_size, verbose=0)
             test_end = time.time()
+
+            
             print('Test  score:', end=' ')
             np.set_printoptions(precision=6, suppress=True)
             print(np.array(test_score))
@@ -157,3 +159,15 @@ if __name__ == "__main__":
             np.set_printoptions(precision=4, suppress=True)
             print('Outflow:    RMSE    MAE | Inflow:    RMSE    MAE')
             print(for_show)
+            
+            results.append(for_show)
+            filenames.append(file)
+
+    len_results = len(results)
+    len_files = len(filenames)
+    
+    if len_results == len_files:
+        for i in range(len_files):
+            res = results[i]
+            filename = filenames[i]    
+            print('{} Outflow RMSE: {:04f}, MAE: {:04f} | Inflow RMSE: {:04f}, MAE:{:04f}'.format(filename, res[0, 0], res[0, 1], res[0, 2], res[0, 3]))

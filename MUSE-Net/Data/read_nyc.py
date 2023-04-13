@@ -7,7 +7,7 @@ class MM:
         self.min = MM_min
 
 
-def load_npy_data(dataset, train_ratio, len_test, len_closeness, len_period, len_trend, T_closeness=1, T_period=24, T_trend=24 * 7):
+def load_npy_data(dataset, len_test, len_closeness, len_period, len_trend, T_closeness=1, T_period=24, T_trend=24 * 7):
     all_data = np.load(dataset)
     len_total, feature, map_height, map_width = all_data.shape
     print('all_data shape: ', all_data.shape)
@@ -28,8 +28,6 @@ def load_npy_data(dataset, train_ratio, len_test, len_closeness, len_period, len
     print('number_of_skip_hours:', number_of_skip_hours)
 
     Y = all_data[number_of_skip_hours:len_total]
-    len_train = round((len(Y) - len_test) * train_ratio)
-    len_val = len(Y) - len_train - len_test
 
     if len_closeness > 0:
         X_closeness = all_data[number_of_skip_hours - T_closeness:len_total - T_closeness]
@@ -48,30 +46,22 @@ def load_npy_data(dataset, train_ratio, len_test, len_closeness, len_period, len
             X_trend = np.concatenate(
                 (X_trend, all_data[number_of_skip_hours - T_trend * (2 + i):len_total - T_trend * (2 + i)]), axis=1)
 
-    X_closeness_train = X_closeness[:len_train]
-    X_period_train = X_period[:len_train]
-    X_trend_train = X_trend[:len_train]
-
-    X_closeness_val = X_closeness[len_train:len_train+len_val]
-    X_period_val = X_period[len_train:len_train+len_val]
-    X_trend_val = X_trend[len_train:len_train+len_val]
-
+    X_closeness_train = X_closeness[:-len_test]
+    X_period_train = X_period[:-len_test]
+    X_trend_train = X_trend[:-len_test]
 
     X_closeness_test = X_closeness[-len_test:]
     X_period_test = X_period[-len_test:]
     X_trend_test = X_trend[-len_test:]
 
     X_train = [X_closeness_train, X_period_train, X_trend_train]
-    X_val = [X_closeness_val, X_period_val, X_trend_val]
     X_test = [X_closeness_test, X_period_test, X_trend_test]
 
-    Y_train = Y[:len_train]
-    Y_val = Y[len_train:len_train+len_val]
+    Y_train = Y[:-len_test]
     Y_test = Y[-len_test:]
 
 
-    print('len_train=' + str(len_train))
-    print('len_val=' + str(len_val))
-    print('len_test =' + str(len_test))
+    print('len_train=' + str(len(Y_train)))
+    print('len_test =' + str(len(Y_test)))
 
-    return X_train, Y_train, X_val, Y_val, X_test, Y_test, mm.max - mm.min, mm.max, mm.min
+    return X_train, Y_train, X_test, Y_test, mm.max - mm.min, mm.max, mm.min

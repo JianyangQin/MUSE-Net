@@ -34,6 +34,19 @@ import setproctitle
 
 setproctitle.setproctitle('MUSE-Net Start! @ Jianyang Qin')
 
+NO = 4
+# for reproduction
+seed = 1
+for i in range(NO):
+    seed = seed * 10 + 7
+seed = seed * 10 + 7
+
+def seed_tensorflow(seed):
+    os.environ['PYTHONHASHSEED'] = '0'
+    random.seed(seed)
+    np.random.seed(seed)
+    tf.set_random_seed(seed)
+
 from keras import backend as K
 
 K.set_image_data_format('channels_first')
@@ -53,6 +66,12 @@ feat_dim = args.feat_dim            # feature dimension
 mu_dim = args.mu_dim                # distribution dimension
 
 iterate_num = args.iterate          # the number of repetition and if retrain the model
+
+def seed_tensorflow(seed):
+    os.environ['PYTHONHASHSEED'] = '0'
+    random.seed(seed)
+    np.random.seed(seed)
+    tf.set_random_seed(seed)
 
 class CustomStopper(EarlyStopping):
     # add argument for starting epoch
@@ -74,8 +93,8 @@ if __name__ == "__main__":
         len_test = T * days_test
         T_closeness, T_period, T_trend = 1, T, T * 7
 
-        X_train, Y_train, X_val, Y_val, X_test, Y_test, MM, Max, Min = \
-            load_npy_data('Data/bike_flow.npy', train_ratio, len_test, len_closeness, len_period, len_trend, T_closeness,
+        X_train, Y_train, X_test, Y_test, MM, Max, Min = \
+            load_npy_data('Data/bike_flow.npy', len_test, len_closeness, len_period, len_trend, T_closeness,
                           T_period, T_trend)
     elif args.dataset == 'TaxiNYC':
         H, W, channel = 10, 20, 2  # grid size
@@ -83,8 +102,8 @@ if __name__ == "__main__":
         len_test = T * days_test
         T_closeness, T_period, T_trend = 1, T, T * 7
 
-        X_train, Y_train, X_val, Y_val, X_test, Y_test, MM, Max, Min = \
-            load_npy_data('Data/taxi_flow.npy', train_ratio, len_test, len_closeness, len_period, len_trend, T_closeness,
+        X_train, Y_train, X_test, Y_test, MM, Max, Min = \
+            load_npy_data('Data/taxi_flow.npy', len_test, len_closeness, len_period, len_trend, T_closeness,
                           T_period, T_trend)
     elif args.dataset == 'TaxiBJ':
         H, W, channel = 32, 32, 2  # grid size
@@ -92,18 +111,16 @@ if __name__ == "__main__":
         len_test = T * days_test
         T_closeness, T_period, T_trend = 1, T, T * 7
 
-        X_train, Y_train, X_val, Y_val, X_test, Y_test, MM, Max, Min = \
-            load_taxibj('Data/BJ13_M32x32_T30_InOut.h5', train_ratio, len_test, len_closeness, len_period, len_trend, T_closeness,
+        X_train, Y_train, X_test, Y_test, MM, Max, Min = \
+            load_taxibj('Data/BJ13_M32x32_T30_InOut.h5', len_test, len_closeness, len_period, len_trend, T_closeness,
                           T_period, T_trend, T)
     else:
         raise ValueError('dataset does not exist')
 
     X_train = np.concatenate((X_train[0], X_train[1], X_train[2]), axis=1)
-    X_val = np.concatenate((X_val[0], X_val[1], X_val[2]), axis=1)
     X_test = np.concatenate((X_test[0], X_test[1], X_test[2]), axis=1)
 
     Y_train = np.concatenate([Y_train, X_train], axis=1)
-    Y_val = np.concatenate([Y_val, X_val], axis=1)
     Y_test = np.concatenate([Y_test, X_test], axis=1)
 
     import time
@@ -119,6 +136,8 @@ if __name__ == "__main__":
     Dropoff_MAPE = np.zeros([iterate_num, 1])
 
     for iterate_index in range(iterate_num):
+        seed_tensorflow(seed)
+        
         count = count + 1
 
         print("***** conv_model *****")
@@ -128,6 +147,7 @@ if __name__ == "__main__":
                                     R_N=2, plus=8, rate=1, drop=0.1, lr=lr)
 
         file_conv = 'Exps/MUSE-Net_' + args.dataset + '_iter' + str(iterate_index) + '.hdf5'
+        # file_conv = 'Exps/MUSE-Net_' + args.dataset + '_iter' + '4.hdf5'
 
         # train
         model_checkpoint = ModelCheckpoint(
@@ -148,10 +168,10 @@ if __name__ == "__main__":
         history = model.fit(X_train, Y_train,
                             epochs=epoch,
                             batch_size=batch_size,
-                            validation_data=(X_val, Y_val),
+                            validation_split=(1-train_ratio),
                             callbacks=[model_checkpoint, stop],
                             verbose=0,
-                            shuffle=False)
+                            shuffle=True)
         train_end = time.time()
 
         # val
