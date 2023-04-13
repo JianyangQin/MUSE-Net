@@ -147,7 +147,6 @@ if __name__ == "__main__":
                                     R_N=2, plus=8, rate=1, drop=0.1, lr=lr)
 
         file_conv = 'Exps/MUSE-Net_' + args.dataset + '_iter' + str(iterate_index) + '.hdf5'
-        # file_conv = 'Exps/MUSE-Net_' + args.dataset + '_iter' + '4.hdf5'
 
         # train
         model_checkpoint = ModelCheckpoint(
