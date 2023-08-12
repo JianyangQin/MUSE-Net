@@ -24,11 +24,11 @@ You can select one of several training modes:
  - Run with "python train.py" for NYC-Bike dataset, or "python main.py --dataset BikeNYC --ctx 0" for NYC-Bike dataset using GPU device 0
 
    ```
-   python main.py
+   python train.py
    ```
 
    ```
-   python main.py --dataset BikeNYC --ctx 0
+   python train.py --dataset BikeNYC --ctx 0
    ```
 
  - Check the output results (RMSE and MAE). Models are saved to "exps" folder for further use.

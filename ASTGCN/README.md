@@ -1,5 +1,5 @@
-# ST-GSP: Spatial-Temporal Global Semantic Representation Learning for Urban Flow Prediction 
-#### *by: Liang Zhao and Min Gao* and Zongwei Wang
+# ASTGCN: Attention Based Spatial-Temporal Graph Convolutional Networks for Traffic Flow Forecasting
+#### *by: Shengnan Guo and Youfang Lin and Ning Feng and Chao Song and Huaiyu Wan*
 
 
 ## Requirements:
@@ -19,16 +19,16 @@ We used three public datasets in this study:
 
 ## Usage 
 You can select one of several training modes:
- - Download the NYC-Bike, NYC-Taxi and TaxiBJ datasets and put them in "data/BikeNYC", "data/TaxiNYC" and "data/TaxiBJ" folder, respectively
+ - Download the NYC-Bike, NYC-Taxi and TaxiBJ datasets and put them in "data" folder
 
- - Run with "python train.py" for NYC-Bike dataset, or "python main.py --dataset BikeNYC --ctx 0" for NYC-Bike dataset using GPU device 0
-
-   ```
-   python train.py
-   ```
+ - Run with "python main.py" for NYC-Bike dataset, or "python main.py --config configurations/BikeNYC_astgcn.conf" for NYC-Bike dataset using pre-defined configuration
 
    ```
-   python train.py --dataset BikeNYC --ctx 0
+   python main.py
+   ```
+
+   ```
+   python main.py --config configurations/BikeNYC_astgcn.conf
    ```
 
  - Check the output results (RMSE and MAE). Models are saved to "exps" folder for further use.
