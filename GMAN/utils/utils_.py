@@ -3,7 +3,7 @@ import torch
 import matplotlib.pyplot as plt
 from torch.utils.data import Dataset
 import numpy as np
-import h5py
+# import h5py
 
 
 # log string

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteMappingsManager">
+    <list>
+      <list>
+        <remote-mappings server-id="python@sftp://root@219.223.251.65:10025/root/anaconda3/envs/coarse2fine/bin/python3.7">
+          <settings>
+            <list>
+              <mapping local-root="$PROJECT_DIR$/GMAN" remote-root="/root/JianyangQin/Github/GMAN" />
+            </list>
+          </settings>
+        </remote-mappings>
+        <remote-mappings server-id="python@sftp://admin@10.249.47.132:10122/home/admin/anaconda3/envs/coarse2fine/bin/python3.7">
+          <settings>
+            <list>
+              <mapping local-root="$PROJECT_DIR$/GMAN" remote-root="/home/admin/JianyangQin/GMAN" />
+            </list>
+          </settings>
+        </remote-mappings>
+        <remote-mappings server-id="python@sftp://root@219.223.251.65:10025/root/anaconda3/envs/dmstgcn/bin/python3.7">
+          <settings>
+            <list>
+              <mapping local-root="$PROJECT_DIR$/DMSTGCN" remote-root="/root/JianyangQin/Github/DMSTGCN" />
+            </list>
+          </settings>
+        </remote-mappings>
+      </list>
+    </list>
+  </component>
+</project>
