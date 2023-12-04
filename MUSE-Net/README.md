@@ -1,5 +1,5 @@
-# Disentangling Multi-Pattern for Traffic Flow Forecasting (MUSE-Net) 
-#### *by: Jianyang Qin, Ruiqi Zhang, Ye Ding, Yan Jia, Xuan Wang and Qing Liao*
+# MUSE-Net: Disentangling Disentangling Multi-Periodicity for Traffic Flow Forecasting (MUSE-Net) 
+#### *by: Jianyang Qin, Yan Jia, Yongxin Tong, Heyan Chai, Ye Ding, Xuan Wang, Bingxin Fang and Qing Liao*
 
 
 

@@ -1,16 +1,16 @@
-# ST-GSP: Spatial-Temporal Global Semantic Representation Learning for Urban Flow Prediction 
-#### *by: Liang Zhao and Min Gao* and Zongwei Wang
+# MUSE-Net: Disentangling Disentangling Multi-Periodicity for Traffic Flow Forecasting (MUSE-Net) 
+#### *by: Jianyang Qin, Yan Jia, Yongxin Tong, Heyan Chai, Ye Ding, Xuan Wang, Bingxin Fang and Qing Liao*
 
+## Models
 
-## Requirements:
-- Python 3.7
-- PyTorch >= 1.7.1
-- CudaToolKit >= 10.2
-- Numpy
-- h5py == 2.9.0
+This project includes the source code of MUSE-Net and comparative baselines.
+
+<p align="center">
+<img src="./misc/baseline_results.png" width="800" class="center">
+</p>
 
 ## Datasets
-You can download the preprocessed datasets from [BaiduYun](https://pan.baidu.com/s/1zeXvNfDu1BbDvgqcC7HupQ), password: tgoh. 
+You can download the preprocessed datasets from [BaiduYun](https://pan.baidu.com/s/1WFhTG5KqIzJ-UzB3SmNKOQ?pwd=hm21). 
 
 We used three public datasets in this study:
 - NYC-Bike
@@ -18,17 +18,4 @@ We used three public datasets in this study:
 - TaxiBJ
 
 ## Usage 
-You can select one of several training modes:
- - Download the NYC-Bike, NYC-Taxi and TaxiBJ datasets and put them in "data/BikeNYC", "data/TaxiNYC" and "data/TaxiBJ" folder, respectively
-
- - Run with "python train.py" for NYC-Bike dataset, or "python main.py --dataset BikeNYC --ctx 0" for NYC-Bike dataset using GPU device 0
-
-   ```
-   python train.py
-   ```
-
-   ```
-   python train.py --dataset BikeNYC --ctx 0
-   ```
-
- - Check the output results (RMSE and MAE). Models are saved to "exps" folder for further use.
+To use each method, please refer to specific folder
